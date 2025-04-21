@@ -96,7 +96,7 @@ const SelectCategory = () => {
             key={item.id}
             onClick={() => setProductid(item.id)}
           >
-            <div className='w-[90vw] sm:w-[60vw] bg-white py-2 px-4 rounded-full flex items-center justify-between hover:scale-105 transition duration-500 shadow-2xl'>
+            <div className='w-[90vw] sm:w-[60vw] bg-white py-2 px-2 rounded-full flex items-center justify-between hover:scale-105 transition duration-500 shadow-2xl'>
               <img
                 src={imageMap[item.image]}
                 alt={item.title}
@@ -109,7 +109,7 @@ const SelectCategory = () => {
                 <button className='rounded-full text-gray-800 flex items-center text-lg'>
                   <FaDownload />
                 </button>
-                <button className='px-3 py-2 bg-gray-600 rounded-full text-white text-sm'>
+                <button className='px-1.5 py-1 sm:px-3 sm:py-2 bg-gray-600 rounded-full text-white text-sm'>
                   Book Now
                 </button>
               </div>
