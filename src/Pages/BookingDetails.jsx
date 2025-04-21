@@ -217,7 +217,7 @@ const BookingDetails = () => {
               <input type="checkbox" checked={formData.agreeTerms} onChange={e => handleChange('agreeTerms', e.target.checked)} className="mr-2" />
               <span className="text-gray-700">I agree to the terms and conditions</span>
             </label>
-            <button type="button" onClick={handleBookNow} className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition">
+            <button type="button" onClick={handleBookNow} className="w-full sm:w-auto px-6 py-3 bg-green-800 text-white rounded-lg hover:bg-green-600 disabled:opacity-50 transition">
               Book Now via WhatsApp
             </button>
           </div>
