@@ -105,7 +105,7 @@ const BookingDetails = () => {
     const { numberOfPersons, extraRoom, roomType, startDate, specialRequests } = formData;
     const dateStr = startDate.toLocaleDateString('en-GB');
     const message = `*New Booking Enquiry*\nTour: ${selectedTour.title}\nDate: ${dateStr}\nPersons: ${numberOfPersons}\nExtra Room: ${extraRoom ? 'Yes' : 'No'}\nRoom Type: ${roomType}\nName: ${fullName}\nWhatsApp: ${whatsapp}\nEmail: ${email}\nRequests: ${specialRequests}`;
-    const yourNumber = '919876543210';
+    const yourNumber = '917732078341';
     window.open(`https://wa.me/${yourNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
 

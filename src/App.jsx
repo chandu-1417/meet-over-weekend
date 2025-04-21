@@ -1,5 +1,5 @@
 // App.jsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import BookingDetails from './Pages/BookingDetails';
 import SelectCategory from './Pages/SelectCategory';
 import ToursContextProvider from './Context/tourContext';
@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router >
       <ToursContextProvider>
         {loading && <Loader />}
         <ScrollToTop />
