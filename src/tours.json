@@ -1,0 +1,172 @@
+{
+  "tours": [
+    {
+      "id": 1,
+      "image": "gokarnaThumb.jpg",
+      "title": "Gokarna Dandeli",
+      "category": "weekend",
+      "duration": "3 Days 2 Nights",
+      "pricePerPerson": 6999
+    },
+    {
+      "id": 2,
+      "image": "kashmirThumb.jpg",
+      "title": "Kashmir Special",
+      "category": "backpacking",
+      "duration": "7 Days 6 Nights",
+      "pricePerPerson": 24999
+    },
+    {
+      "id": 3,
+      "image": "manaliThumb.jpg",
+      "title": "Manali & Kasol",
+      "category": "backpacking",
+      "duration": "5 Days 4 Nights",
+      "pricePerPerson": 12999
+    },
+    {
+      "id": 4,
+      "image": "meghalayaThumb.jpg",
+      "title": "Meghalaya Backpacking",
+      "category": "backpacking",
+      "duration": "6 Days 5 Nights",
+      "pricePerPerson": 15999
+    },
+    {
+      "id": 5,
+      "image": "manaliCoupleThumb.jpg",
+      "title": "Manali & Kasol Couple Package",
+      "category": "couple",
+      "duration": "4 Days 3 Nights",
+      "pricePerPerson": 18999
+    },
+    {
+      "id": 6,
+      "image": "coorgThumb.jpg",
+      "title": "Coorg & Chikmagalur",
+      "category": "weekend",
+      "duration": "2 Days 1 Night",
+      "pricePerPerson": 4999
+    },
+    {
+      "id": 7,
+      "image": "kerala.jpg",
+      "title": "Kerala Special",
+      "category": "backpacking",
+      "duration": "5 Days 4 Nights",
+      "pricePerPerson": 13999
+    },
+    {
+      "id": 8,
+      "image": "pondicherryThumb.jpg",
+      "title": "Pondicherry & Mangrove Forest",
+      "category": "backpacking",
+      "duration": "3 Days 2 Nights",
+      "pricePerPerson": 8999
+    },
+    {
+      "id": 9,
+      "image": "ootyThumb.jpg",
+      "title": "Ooty & Isha Adi Yogi",
+      "category": "weekend",
+      "duration": "2 Days 1 Night",
+      "pricePerPerson": 5999
+    },
+    {
+      "id": 10,
+      "image": "wayanandThumb.jpg",
+      "title": "Wayanand Special",
+      "category": "backpacking",
+      "duration": "4 Days 3 Nights",
+      "pricePerPerson": 10999
+    },
+    {
+      "id": 11,
+      "image": "ladakhThumb.jpg",
+      "title": "Leh Ladakh Bike Trip",
+      "category": "couple",
+      "duration": "10 Days 9 Nights",
+      "pricePerPerson": 34999
+    },
+    {
+      "id": 12,
+      "image": "kedarnathThumb.jpg",
+      "title": "Kedranath Yatra",
+      "category": "backpacking",
+      "duration": "6 Days 5 Nights",
+      "pricePerPerson": 17999
+    },
+    {
+      "id": 13,
+      "image": "dhodhamThumb.jpg",
+      "title": "Dhodham Yatra",
+      "category": "backpacking",
+      "duration": "8 Days 7 Nights",
+      "pricePerPerson": 21999
+    },
+    {
+      "id": 14,
+      "image": "ootyCoonoorThumb.jpg",
+      "title": "Ooty Coonoor",
+      "category": "couple",
+      "duration": "3 Days 2 Nights",
+      "pricePerPerson": 12999
+    },
+    {
+      "id": 15,
+      "image": "thailandThumb.jpg",
+      "title": "Thailand Special",
+      "category": "international",
+      "duration": "7 Days 6 Nights",
+      "pricePerPerson": 49999
+    },
+    {
+      "id": 16,
+      "image": "keralaSpecialThumb.jpg",
+      "title": "Kerala Special",
+      "category": "backpacking",
+      "duration": "5 Days 4 Nights",
+      "pricePerPerson": 14999
+    },
+    {
+      "id": 17,
+      "image": "vietnamThumb.jpg",
+      "title": "Vibrant Vietnam",
+      "category": "international",
+      "duration": "8 Days 7 Nights",
+      "pricePerPerson": 54999
+    },
+    {
+      "id": 18,
+      "image": "ladakhBackpackThumb.jpg",
+      "title": "Ladakh Backpacking",
+      "category": "backpacking",
+      "duration": "9 Days 8 Nights",
+      "pricePerPerson": 27999
+    },
+    {
+      "id": 19,
+      "image": "chardhamThumb.jpg",
+      "title": "Chardham Yatra",
+      "category": "backpacking",
+      "duration": "12 Days 11 Nights",
+      "pricePerPerson": 37999
+    },
+    {
+      "id": 20,
+      "image": "kashmirLakes.jpg",
+      "title": "Kashmir Great Lakes",
+      "category": "backpacking",
+      "duration": "7 Days 6 Nights",
+      "pricePerPerson": 22999
+    },
+    {
+      "id": 21,
+      "image": "gokarnaThumb.jpg",
+      "title": "Darjeeling",
+      "category": "couple",
+      "duration": "5 Days 4 Nights",
+      "pricePerPerson": 16999
+    }
+  ]
+}
