@@ -74,7 +74,7 @@ const SelectCategory = () => {
         <h2 className='text-3xl sm:text-2xl font-bold text-white'>Book My Trip</h2>
 
         {/* Category Filter Dropdown */}
-        <div className='mt-8 w-44 bg-amber-200 flex justify-center'>
+        <div className='mt-12 w-44 flex justify-center'>
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
@@ -89,7 +89,7 @@ const SelectCategory = () => {
         </div>
       </div>
 
-      <div className='flex flex-col items-center gap-4 py-12'>
+      <div className='flex flex-col items-center gap-4 pb-12 pt-4'>
         {filteredTours.map((item) => (
           <Link
             to={`/booking-details/${item.id}`}
