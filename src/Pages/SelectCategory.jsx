@@ -71,7 +71,7 @@ const SelectCategory = () => {
     <div className='w-full min-h-[100vh] bg-gradient-to-b from-[#f05f57] to-[#360940]'>
       <div className='flex flex-col items-center py-6'>
         <img src={logo} alt='Logo' className='h-[13vh] w-[13vh]' />
-        <h2 className='text-2xl font-bold text-white'>Meet Over Weekend</h2>
+        <h2 className='text-2xl font-bold text-white'>Book My Trip</h2>
 
         {/* Category Filter Dropdown */}
         <div className='mt-4 w-44'>

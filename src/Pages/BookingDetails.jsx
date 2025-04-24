@@ -127,7 +127,7 @@ const BookingDetails = () => {
       <header className="text-center mb-6">
         <img src={logo} alt="Logo" className="h-20 mx-auto" />
         <p className="text-lg">BOOKING PORTAL</p>
-        <h1 className="text-3xl font-bold">Meet Over Weekend</h1>
+        <h1 className="text-3xl font-bold">Book My Trip</h1>
         <p className='pb-4'>Customer Support: +91 XXXXX XXXXX</p>
        
       </header>
