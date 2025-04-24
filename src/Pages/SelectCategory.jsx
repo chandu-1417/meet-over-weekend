@@ -71,14 +71,14 @@ const SelectCategory = () => {
     <div className='w-full min-h-[100vh] bg-gradient-to-b from-[#f05f57] to-[#360940]'>
       <div className='flex flex-col items-center py-6'>
         <img src={logo} alt='Logo' className='h-[13vh] w-[13vh]' />
-        <h2 className='text-2xl font-bold text-white'>Book My Trip</h2>
+        <h2 className='text-3xl sm:text-2xl font-bold text-white'>Book My Trip</h2>
 
         {/* Category Filter Dropdown */}
-        <div className='mt-4 w-44'>
+        <div className='mt-8 w-44 bg-amber-200 flex justify-center'>
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className='w-full p-2 rounded-lg bg-white text-gray-800 focus:outline-blue-400 focus:ring-2 focus:ring-[#f05f57]'
+            className='w-[80%] sm:w-full p-2 rounded-lg bg-white text-gray-800 focus:outline-blue-400 focus:ring-2 focus:ring-[#f05f57]'
           >
             {categories.map((category, idx) => (
               <option key={idx} value={category === 'All categories' ? '' : category}>
