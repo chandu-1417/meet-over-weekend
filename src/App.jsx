@@ -7,6 +7,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Loader from './components/Loader';
 import { useState, useEffect } from 'react';
 
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -20,6 +21,7 @@ function App() {
   }, []);
 
   return (
+    
     <Router >
       <ToursContextProvider>
         {loading && <Loader />}

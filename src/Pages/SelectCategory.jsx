@@ -73,7 +73,6 @@ const SelectCategory = () => {
         <img src={logo} alt='Logo' className='h-[13vh] w-[13vh]' />
         <h2 className='text-3xl sm:text-2xl font-bold text-white'>Book My Trip</h2>
 
-        {/* Category Filter Dropdown */}
         <div className='mt-12 w-44 flex justify-center'>
           <select
             value={selectedCategory}
@@ -96,7 +95,7 @@ const SelectCategory = () => {
             key={item.id}
             onClick={() => setProductid(item.id)}
           >
-            <div className='w-[90vw] sm:w-[60vw] bg-white py-2 px-2 rounded-full flex items-center justify-between hover:scale-105 transition duration-500 shadow-2xl'>
+            <div className='w-[90vw] sm:w-[60vw] bg-white py-2 px-2 rounded-full flex items-center justify-between hover:scale-105 group transition duration-500 shadow-2xl'>
               <img
                 src={imageMap[item.image]}
                 alt={item.title}
@@ -106,10 +105,7 @@ const SelectCategory = () => {
                 {item.title}
               </p>
               <div className='flex gap-3'>
-                <button className='rounded-full text-gray-800 flex items-center text-lg'>
-                  <FaDownload />
-                </button>
-                <button className='px-1.5 py-1 sm:px-3 sm:py-2 bg-gray-600 rounded-full text-white text-sm'>
+                <button className='px-3 py-1.5 sm:px-3 sm:py-2 bg-gray-600 rounded-full text-white group-hover:bg-gray-800 text-md mr-2 sm:text-sm sm:mr-0'>
                   Book Now
                 </button>
               </div>
@@ -119,9 +115,32 @@ const SelectCategory = () => {
       </div>
 
       <div className='text-center mt-5 pb-6 text-white flex text-4xl gap-3 justify-center'>
-        <FaInstagram className='hover:scale-110 transition duration-150' />
-        <FaFacebook className='hover:scale-110 transition duration-150' />
-        <FaWhatsapp className='hover:scale-110 transition duration-150' />
+        <a
+          href="https://instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <FaInstagram className="hover:scale-110 transition duration-150" />
+        </a>
+
+        <a
+          href="https://facebook.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          <FaFacebook className="hover:scale-110 transition duration-150" />
+        </a>
+
+        <a
+          href="https://wa.me/919505764039"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+        >
+          <FaWhatsapp className="hover:scale-110 transition duration-150" />
+        </a>
       </div>
     </div>
   );

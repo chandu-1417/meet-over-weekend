@@ -3,11 +3,11 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react(),tailwindcss()],
-  base: '/meet-over-weekend/',
+  base: mode === 'production' ? '/meet-over-weekend/' : '/',
   server: {
     host:true,
-    port:5173,
+    port:5174,
   }
-})
+}))

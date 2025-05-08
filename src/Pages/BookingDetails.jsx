@@ -8,6 +8,8 @@ import { tourContext } from '../Context/tourContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { IoArrowBack } from "react-icons/io5";
+import { db } from '../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 // Static imports of all tour images
 import gokarnaThumb from '../assets/Gokarna-mow_thumb.jpg';
@@ -77,35 +79,91 @@ const BookingDetails = () => {
 
   const handleBookNow = () => {
     const { fullName, whatsapp, email, agreeTerms } = formData;
-    if (!fullName.trim() || !whatsapp.trim() || !email.trim()) {
-      toast.error('Please fill in all required fields', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "colored",
-      });
+    
+    // Toast configuration
+    const toastOptions = {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "colored",
+    };
+
+    // Validate Full Name
+    if (!fullName.trim()) {
+      toast.error('Full name is required', toastOptions);
+      return;
+    }
+    if (fullName.trim().length < 2) {
+      toast.error('Full name must be at least 2 characters', toastOptions);
       return;
     }
 
-    if (!agreeTerms) {
-      toast.error('Please agree to the terms and conditions', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "colored",
-      });
+    // Validate WhatsApp Number
+    if (!whatsapp.trim()) {
+      toast.error('WhatsApp number is required', toastOptions);
       return;
     }
+    const whatsappRegex = /^[6-9]\d{9}$/;
+    if (!whatsappRegex.test(whatsapp.trim())) {
+      toast.error('Please enter a valid 10-digit Indian mobile number', toastOptions);
+      return;
+    }
+
+    // Validate Email
+    if (!email.trim()) {
+      toast.error('Email address is required', toastOptions);
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      toast.error('Please enter a valid email address (e.g., example@domain.com)', toastOptions);
+      return;
+    }
+
+    // Validate Terms Agreement
+    if (!agreeTerms) {
+      toast.error('Please agree to the terms and conditions', toastOptions);
+      return;
+    }
+
+    // All validations passed - proceed with booking
     const { numberOfPersons, extraRoom, roomType, startDate, specialRequests } = formData;
     const dateStr = startDate.toLocaleDateString('en-GB');
     const message = `*New Booking Enquiry*\nTour: ${selectedTour.title}\nDate: ${dateStr}\nPersons: ${numberOfPersons}\nExtra Room: ${extraRoom ? 'Yes' : 'No'}\nRoom Type: ${roomType}\nName: ${fullName}\nWhatsApp: ${whatsapp}\nEmail: ${email}\nRequests: ${specialRequests}`;
-    const yourNumber = '917732078341';
+    const yourNumber = '919505764039';
+
+    const saveBookingToFirebase = async () => {
+      try {
+        await addDoc(collection(db, 'bookings'), {
+          tourId: selectedTour.id,
+          tourTitle: selectedTour.title,
+          ...formData,
+          startDate: formData.startDate.toISOString(),
+          createdAt: serverTimestamp()
+        });
+      } catch (error) {
+        console.error('Error saving booking:', error);
+        toast.error('Failed to save booking. Please try again.', toastOptions);
+      }
+    };
+
+    saveBookingToFirebase();
+    toast.success('Booking details sent!', toastOptions);
+    setFormData({
+      numberOfPersons: 1,
+      extraRoom: false,
+      roomType: 'standard',
+      startDate: new Date(),
+      fullName: '',
+      whatsapp: '',
+      email: '',
+      specialRequests: '',
+      agreeTerms: false
+    });
+
     window.open(`https://wa.me/${yourNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
@@ -123,21 +181,19 @@ const BookingDetails = () => {
         draggable
         pauseOnHover
         theme="colored" />
-      
+
       <header className="text-center mb-6">
         <img src={logo} alt="Logo" className="h-20 mx-auto" />
         <p className="text-lg">BOOKING PORTAL</p>
         <h1 className="text-3xl font-bold">Book My Trip</h1>
         <p className='pb-4'>Customer Support: +91 91234 56789</p>
-       
       </header>
-      
 
       <main className="w-full max-w-3xl bg-white shadow-lg rounded-xl p-6 mt-3 relative">
-      <Link to="/"><div className='flex items-center gap-1 absolute -top-8'><IoArrowBack /> Back</div></Link>
+        <Link to="/"><div className='flex items-center gap-1 absolute -top-8'><IoArrowBack /> Back</div></Link>
+        
         {/* Tour Info */}
         <div className="flex flex-col md:flex-row items-center md:justify-between mb-5">
-
           <div className="text-center md:text-left">
             <h2 className="text-2xl font-semibold mb-1">{selectedTour.title}</h2>
             <p className="flex items-center justify-center md:justify-start gap-1 text-gray-700">
@@ -172,16 +228,35 @@ const BookingDetails = () => {
             <h3 className="text-xl font-semibold border-b pb-1">Personal Details</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex flex-col">
-                <label className="text-gray-700 mb-1">Full Name</label>
-                <input type="text" value={formData.fullName} onChange={e => handleChange('fullName', e.target.value)} className="w-full p-2 border rounded-lg focus:ring-blue-500" />
+                <label className="text-gray-700 mb-1">Full Name <span className="text-red-500">*</span></label>
+                <input 
+                  type="text" 
+                  value={formData.fullName} 
+                  onChange={e => handleChange('fullName', e.target.value)} 
+                  className="w-full p-2 border rounded-lg focus:ring-blue-500" 
+                  required 
+                />
               </div>
               <div className="flex flex-col">
-                <label className="text-gray-700 mb-1">WhatsApp Number</label>
-                <input type="tel" value={formData.whatsapp} onChange={e => handleChange('whatsapp', e.target.value)} className="w-full p-2 border rounded-lg focus:ring-blue-500" />
+                <label className="text-gray-700 mb-1">WhatsApp Number <span className="text-red-500">*</span></label>
+                <input 
+                  type="tel" 
+                  value={formData.whatsapp} 
+                  onChange={e => handleChange('whatsapp', e.target.value)} 
+                  className="w-full p-2 border rounded-lg focus:ring-blue-500" 
+                  required 
+                  maxLength="10"
+                />
               </div>
               <div className="flex flex-col sm:col-span-2">
-                <label className="text-gray-700 mb-1">Email Address</label>
-                <input type="email" value={formData.email} onChange={e => handleChange('email', e.target.value)} className="w-full p-2 border rounded-lg focus:ring-blue-500" />
+                <label className="text-gray-700 mb-1">Email Address <span className="text-red-500">*</span></label>
+                <input 
+                  type="email" 
+                  value={formData.email} 
+                  onChange={e => handleChange('email', e.target.value)} 
+                  className="w-full p-2 border rounded-lg focus:ring-blue-500" 
+                  required 
+                />
               </div>
             </div>
           </section>
@@ -193,13 +268,31 @@ const BookingDetails = () => {
               <div className="flex items-center">
                 <label className="mr-2 text-gray-700">Persons:</label>
                 <div className="flex items-center border rounded-lg overflow-hidden">
-                  <button type="button" onClick={() => handleChange('numberOfPersons', Math.max(1, formData.numberOfPersons - 1))} className="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition text-lg">-</button>
+                  <button 
+                    type="button" 
+                    onClick={() => handleChange('numberOfPersons', Math.max(1, formData.numberOfPersons - 1))} 
+                    className="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition text-lg"
+                  >
+                    -
+                  </button>
                   <span className="px-6 py-2 text-center text-lg">{formData.numberOfPersons}</span>
-                  <button type="button" onClick={() => handleChange('numberOfPersons', formData.numberOfPersons + 1)} className="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition text-lg">+</button>
+                  <button 
+                    type="button" 
+                    onClick={() => handleChange('numberOfPersons', formData.numberOfPersons + 1)} 
+                    className="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition text-lg"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
               <div className="flex items-center">
-                <input type="checkbox" id="extra-room" checked={formData.extraRoom} onChange={e => handleChange('extraRoom', e.target.checked)} className="mr-2" />
+                <input 
+                  type="checkbox" 
+                  id="extra-room" 
+                  checked={formData.extraRoom} 
+                  onChange={e => handleChange('extraRoom', e.target.checked)} 
+                  className="mr-2" 
+                />
                 <label htmlFor="extra-room" className="text-gray-700">Extra room (+₹1500)</label>
               </div>
             </div>
@@ -208,16 +301,31 @@ const BookingDetails = () => {
           {/* Special Requests */}
           <section className="flex flex-col">
             <label className="text-gray-700 mb-1">Special Requests</label>
-            <textarea value={formData.specialRequests} onChange={e => handleChange('specialRequests', e.target.value)} placeholder="Dietary/access needs" className="w-full p-2 border rounded-lg focus:ring-blue-500 h-24 resize-none"></textarea>
+            <textarea 
+              value={formData.specialRequests} 
+              onChange={e => handleChange('specialRequests', e.target.value)} 
+              placeholder="Dietary/access needs" 
+              className="w-full p-2 border rounded-lg focus:ring-blue-500 h-24 resize-none"
+            ></textarea>
           </section>
 
           {/* Terms & Book Now */}
           <div className="flex flex-col items-center">
             <label className="flex items-center mb-4">
-              <input type="checkbox" checked={formData.agreeTerms} onChange={e => handleChange('agreeTerms', e.target.checked)} className="mr-2" />
-              <span className="text-gray-700">I agree to the terms and conditions</span>
+              <input 
+                type="checkbox" 
+                checked={formData.agreeTerms} 
+                onChange={e => handleChange('agreeTerms', e.target.checked)} 
+                className="mr-2" 
+                required
+              />
+              <span className="text-gray-700">I agree to the <Link to="" className="text-blue-600 hover:underline">terms and conditions</Link> <span className="text-red-500">*</span></span>
             </label>
-            <button type="button" onClick={handleBookNow} className="w-full sm:w-auto px-6 py-3 bg-green-800 text-white rounded-lg hover:bg-green-600 disabled:opacity-50 transition">
+            <button 
+              type="button" 
+              onClick={handleBookNow} 
+              className="w-full sm:w-auto px-6 py-3 bg-green-800 text-white rounded-lg hover:bg-green-600 disabled:opacity-50 transition"
+            >
               Book Now via WhatsApp
             </button>
           </div>
