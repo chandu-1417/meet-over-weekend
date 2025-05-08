@@ -186,7 +186,7 @@ const BookingDetails = () => {
         <img src={logo} alt="Logo" className="h-20 mx-auto" />
         <p className="text-lg">BOOKING PORTAL</p>
         <h1 className="text-3xl font-bold">Book My Trip</h1>
-        <p className='pb-4'>Customer Support: +91 91234 56789</p>
+        <p className='pb-4'>Customer Support: +91 95057 64039</p>
       </header>
 
       <main className="w-full max-w-3xl bg-white shadow-lg rounded-xl p-6 mt-3 relative">
